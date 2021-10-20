@@ -36,14 +36,16 @@
             <div class="alert alert-success">
                 Регистрация успешна
             </div>
-            <form action="">
+
+
+            <form method="post" action="/log_in">
                 <div class="form-group">
                     <label class="form-label" for="username">Email</label>
-                    <input type="email" id="username" class="form-control" placeholder="Эл. адрес" value="">
+                    <input type="email" id="username" name="email" class="form-control" placeholder="Эл. адрес" value="">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="password">Пароль</label>
-                    <input type="password" id="password" class="form-control" placeholder="" >
+                    <input type="password" id="password" name="password" class="form-control" placeholder="" >
                 </div>
                 <div class="form-group text-left">
                     <div class="custom-control custom-checkbox">
@@ -53,6 +55,8 @@
                 </div>
                 <button type="submit" class="btn btn-default float-right">Войти</button>
             </form>
+
+
         </div>
         <div class="blankpage-footer text-center">
             Нет аккаунта? <a href="/pageRegistr"><strong>Зарегистрироваться</strong>
