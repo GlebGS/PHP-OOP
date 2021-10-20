@@ -8,9 +8,10 @@ $builder->addDefinitions('../app/Config/ContainerDefinition.php');
 $container = $builder->build();
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
-
-  $r->addRoute('GET', '/', ['App\Controllers\HomeViewController', 'users']);
-
+//  View
+  $r->addRoute('GET', '/users[?{id:\d+}]', ['App\Controllers\HomeViewController', 'users']);
+  $r->addRoute('GET', '/pageLogin', ['App\Controllers\HomeViewController', 'pageLogin']);
+  $r->addRoute('GET', '/pageRegistr', ['App\Controllers\HomeViewController', 'pageRegistr']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];

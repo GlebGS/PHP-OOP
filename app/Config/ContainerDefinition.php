@@ -1,6 +1,7 @@
 <?php
 
 use League\Plates\Engine;
+use \Delight\Auth\Auth;
 
 return [
   PDO::class => function(){
@@ -16,5 +17,9 @@ return [
 
   \League\Plates\Engine::class => function(){
     return new \League\Plates\Engine('../app/Views/');
+  },
+
+  \Delight\Auth\Auth::class => function($container){
+    return new \Delight\Auth\Auth($container->get('PDO'));
   }
 ];
