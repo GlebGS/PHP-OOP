@@ -25,7 +25,7 @@ class UserController
     try {
       $userId = $this->auth->register($_POST['email'], $_POST['password'], $_POST['username'], function ($selector, $token) {
 
-        flash()->success("<b>Уведомлени!</b> Регистрация прошла успешно. Мы отправили сообщение на ваш Email!");
+        flash()->success("<b>Уведомление!</b> Регистрация прошла успешно. Мы отправили сообщение на ваш Email!");
         header("Location: /pageVerefication");
         return new EmailController($_POST['email'], $_POST['password'], $selector, $token);
       });
@@ -51,34 +51,39 @@ class UserController
 
   public function verefication(){
     try {
-      $this->auth->confirmEmail($_GET['selector'], $_GET['token']);
+      $this->auth->confirmEmail($_POST['selector'], $_POST['token']);
 
-      flash()->success("<b>Уведомлени!</b> Email подтверждён!");
+      flash()->success("<b>Уведомление!</b> Email подтверждён!");
       header("Location: /pageLogin");die;
     }
     catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
-      flash()->success("<b>Уведомлени!</b> Email подтверждён!");
-      header("Location: /pageLogin");die;
+      flash()->success("<b>Уведомление!</b> Email подтверждён!");
+      header("Location: /pageVerefication");die;
     }
   }
 
   public function log_in(){
     try {
       $this->auth->login($_POST['email'], $_POST['password']);
+      $id = $this->auth->getUserId();
 
-      echo 'User is logged in';
+      header("Location: /users?id=$id");die;
     }
     catch (\Delight\Auth\InvalidEmailException $e) {
-      die('Wrong email address');
+      flash()->error("Неправильный адрес электронной почты!");
+      header("Location: /pageLogin");die;
     }
     catch (\Delight\Auth\InvalidPasswordException $e) {
-      die('Wrong password');
+      flash()->error("Неправильный пароль!");
+      header("Location: /pageLogin");die;
     }
     catch (\Delight\Auth\EmailNotVerifiedException $e) {
-      die('Email not verified');
+      flash()->error("Электронная почта не подтверждена!");
+      header("Location: /pageLogin");die;
     }
     catch (\Delight\Auth\TooManyRequestsException $e) {
-      die('Too many requests');
+      flash()->error("Слишком много запросов!");
+      header("Location: /pageLogin");die;
     }
   }
 
