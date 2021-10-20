@@ -20,6 +20,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/delight-im/cookie" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/delight-im/db" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/delight-im/http" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tamtamchik/simple-flash" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/eoghanobrien/php-simple-mail" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

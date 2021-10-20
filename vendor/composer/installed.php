@@ -64,6 +64,15 @@
             'reference' => 'a5c2c4eae1dd3207f797984e8f64f2d71ed889dd',
             'dev_requirement' => false,
         ),
+        'eoghanobrien/php-simple-mail' => array(
+            'pretty_version' => '1.7.1',
+            'version' => '1.7.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../eoghanobrien/php-simple-mail',
+            'aliases' => array(),
+            'reference' => '9b8d4c01c7c0cac769ba42ccd08a73ecee855825',
+            'dev_requirement' => false,
+        ),
         'kint-php/kint' => array(
             'pretty_version' => '3.3',
             'version' => '3.3.0.0',
@@ -141,6 +150,15 @@
             'provided' => array(
                 0 => '^1.0',
             ),
+        ),
+        'tamtamchik/simple-flash' => array(
+            'pretty_version' => '2.0.1',
+            'version' => '2.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../tamtamchik/simple-flash',
+            'aliases' => array(),
+            'reference' => '62fc3d59df2cc5bbd746af25f488b76585362c45',
+            'dev_requirement' => false,
         ),
         'twbs/bootstrap' => array(
             'pretty_version' => 'v5.1.3',

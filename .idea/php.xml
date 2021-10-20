@@ -17,6 +17,8 @@
       <path value="$PROJECT_DIR$/vendor/delight-im/cookie" />
       <path value="$PROJECT_DIR$/vendor/delight-im/db" />
       <path value="$PROJECT_DIR$/vendor/delight-im/http" />
+      <path value="$PROJECT_DIR$/vendor/tamtamchik/simple-flash" />
+      <path value="$PROJECT_DIR$/vendor/eoghanobrien/php-simple-mail" />
     </include_path>
   </component>
 </project>

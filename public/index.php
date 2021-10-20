@@ -1,5 +1,5 @@
 <?php
-
+if( !session_id() ) @session_start();
 require "../vendor/autoload.php";
 
 $builder = new DI\ContainerBuilder();
@@ -12,10 +12,12 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
   $r->addRoute('GET', '/users[?{id:\d+}]', ['App\Controllers\HomeViewController', 'users']);
   $r->addRoute('GET', '/pageLogin', ['App\Controllers\HomeViewController', 'pageLogin']);
   $r->addRoute('GET', '/pageRegistr', ['App\Controllers\HomeViewController', 'pageRegistr']);
+  $r->addRoute('GET', '/pageVerefication', ['App\Controllers\HomeViewController', 'pageVerefication']);
 
 //  Functions
   $r->addRoute('POST', '/log_in', ['App\Controllers\UserController', 'log_in']);
   $r->addRoute('POST', '/sign_up', ['App\Controllers\UserController', 'sign_up']);
+  $r->addRoute('POST', '/verefication', ['App\Controllers\UserController', 'verefication']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
