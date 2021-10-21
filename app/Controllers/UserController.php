@@ -87,6 +87,9 @@ class UserController
     }
   }
 
+  public function logout(){
 
+    header("Location: /users");die;
+  }
 
 }

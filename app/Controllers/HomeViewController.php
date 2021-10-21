@@ -21,9 +21,17 @@ class HomeViewController
     $this->engine = $engine;
   }
 
+  public function index(){
+
+  }
+
   public function users()
   {
-    echo $this->engine->render('users');
+    if ($_GET['id']):
+      echo $this->engine->render('users');
+    else:
+      header("Location: /pageLogin");die;
+    endif;
   }
 
   public function pageLogin(){

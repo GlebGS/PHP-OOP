@@ -9,6 +9,7 @@ $container = $builder->build();
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
 //  View
+  $r->addRoute('GET', '/', ['App\Controllers\HomeViewController', 'index']);
   $r->addRoute('GET', '/users[?{id:\d+}]', ['App\Controllers\HomeViewController', 'users']);
   $r->addRoute('GET', '/pageLogin', ['App\Controllers\HomeViewController', 'pageLogin']);
   $r->addRoute('GET', '/pageRegistr', ['App\Controllers\HomeViewController', 'pageRegistr']);
@@ -18,6 +19,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
   $r->addRoute('POST', '/log_in', ['App\Controllers\UserController', 'log_in']);
   $r->addRoute('POST', '/sign_up', ['App\Controllers\UserController', 'sign_up']);
   $r->addRoute('POST', '/verefication', ['App\Controllers\UserController', 'verefication']);
+  $r->addRoute('GET', '/logout', ['App\Controllers\UserController', 'logout']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
