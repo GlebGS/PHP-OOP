@@ -32,9 +32,7 @@ class HomeViewController
     header("Location: /pageLogin");die;
   }
 
-  public function users()
-  {
-
+  public function users(){
     if ($_GET['id']):
       $posts = $this->sqlQuery->select("users");
 
