@@ -1,9 +1,9 @@
-<?php $this->layout('../view_layout'); ?>
+<?php $this->layout('../view_layout');?>
 
 <main id="js-page-content" role="main" class="page-content mt-3">
-    <div class="alert alert-success">
-        Профиль успешно обновлен.
-    </div>
+
+<!--    FLASH-MESSAGE-->
+
     <div class="subheader">
         <h1 class="subheader-title">
             <i class='subheader-icon fal fa-users'></i> Список пользователей
@@ -11,7 +11,13 @@
     </div>
     <div class="row">
         <div class="col-xl-12">
-            <a class="btn btn-success" href="create_user.html">Добавить</a>
+
+            <?php if ($getRole[1] === "ADMIN"): ?>
+                <a class="btn btn-success" href="/pageCreate">Добавить</a>
+            <?php else: ?>
+
+            <?php endif; ?>
+
 
             <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
                 <input type="text" id="js-filter-contacts" name="filter-contacts"
@@ -41,31 +47,43 @@
                                           style="background-image:url(<?php echo $v['img']; ?>); background-size: cover;"></span>
                                 </span>
                           <div class="info-card-text flex-1">
-                              <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info"
-                                 data-toggle="dropdown" aria-expanded="false">
-                                  <?php echo $v['username']; ?>
-                                  <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
-                                  <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
-                              </a>
-                              <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="edit.html">
-                                      <i class="fa fa-edit"></i>
-                                      Редактировать</a>
-                                  <a class="dropdown-item" href="security.html">
-                                      <i class="fa fa-lock"></i>
-                                      Безопасность</a>
-                                  <a class="dropdown-item" href="status.html">
-                                      <i class="fa fa-sun"></i>
-                                      Установить статус</a>
-                                  <a class="dropdown-item" href="media.html">
-                                      <i class="fa fa-camera"></i>
-                                      Загрузить аватар
+
+                              <?php if ($getRole[1] === "ADMIN"): ?>
+                                  <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
+                                      <?php echo $v['username']; ?>
+                                      <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
+                                      <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
                                   </a>
-                                  <a href="#" class="dropdown-item" onclick="return confirm('are you sure?');">
-                                      <i class="fa fa-window-close"></i>
-                                      Удалить
-                                  </a>
-                              </div>
+                              <?php else: ?>
+                                  <p>
+                                    <?php echo $v['username']; ?>
+                                  </p>
+                              <?php endif; ?>
+
+                            <?php if ($getRole[1] === "ADMIN"): ?>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="edit.html">
+                                        <i class="fa fa-edit"></i>
+                                        Редактировать</a>
+                                    <a class="dropdown-item" href="security.html">
+                                        <i class="fa fa-lock"></i>
+                                        Безопасность</a>
+                                    <a class="dropdown-item" href="status.html">
+                                        <i class="fa fa-sun"></i>
+                                        Установить статус</a>
+                                    <a class="dropdown-item" href="media.html">
+                                        <i class="fa fa-camera"></i>
+                                        Загрузить аватар
+                                    </a>
+                                    <a href="#" class="dropdown-item" onclick="return confirm('are you sure?');">
+                                        <i class="fa fa-window-close"></i>
+                                        Удалить
+                                    </a>
+                                </div>
+                            <?php else: ?>
+
+                            <?php endif; ?>
+
                               <span class="text-truncate text-truncate-xl">
                                 <?php echo $v['position']; ?>
                               </span>
@@ -77,34 +95,42 @@
                           </button>
                       </div>
                   </div>
-                  <div class="card-body p-0 collapse show">
-                      <div class="p-3">
-                          <a href="tel:<?php echo $v['phone']; ?>" class="mt-1 d-block fs-sm fw-400 text-dark">
-                              <i class="fas fa-mobile-alt text-muted mr-2"></i>
-                            <?php echo $v['phone']; ?>
-                          </a>
-                          <a href="mailto:<?php echo $v['email']; ?>"
-                             class="mt-1 d-block fs-sm fw-400 text-dark">
-                              <i class="fas fa-mouse-pointer text-muted mr-2"></i>
-                                <?php echo $v['email']; ?>
-                          </a>
-                          <address class="fs-sm fw-400 mt-4 text-muted">
-                              <i class="fas fa-map-pin mr-2"></i>
-                            <?php echo $v['address']; ?>
-                          </address>
-                          <div class="d-flex flex-row">
-                              <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#4680C2">
-                                  <i class="fab fa-vk"></i>
-                              </a>
-                              <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#38A1F3">
-                                  <i class="fab fa-telegram"></i>
-                              </a>
-                              <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#E1306C">
-                                  <i class="fab fa-instagram"></i>
-                              </a>
-                          </div>
-                      </div>
-                  </div>
+
+                <?php if ($getRole[1] === "ADMIN"): ?>
+                    <div class="card-body p-0 collapse show">
+                        <div class="p-3">
+                            <a href="tel:<?php echo $v['phone']; ?>" class="mt-1 d-block fs-sm fw-400 text-dark">
+                                <i class="fas fa-mobile-alt text-muted mr-2"></i>
+                              <?php echo $v['phone']; ?>
+                            </a>
+                            <a href="mailto:<?php echo $v['email']; ?>"
+                               class="mt-1 d-block fs-sm fw-400 text-dark">
+                                <i class="fas fa-mouse-pointer text-muted mr-2"></i>
+                              <?php echo $v['email']; ?>
+                            </a>
+                            <address class="fs-sm fw-400 mt-4 text-muted">
+                                <i class="fas fa-map-pin mr-2"></i>
+                              <?php echo $v['address']; ?>
+                            </address>
+                            <div class="d-flex flex-row">
+                                <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#4680C2">
+                                    <i class="fab fa-vk"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#38A1F3">
+                                    <i class="fab fa-telegram"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#E1306C">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php else: ?>
+
+                <?php endif; ?>
+
+
+
               </div>
           </div>
       <?php endforeach; ?>

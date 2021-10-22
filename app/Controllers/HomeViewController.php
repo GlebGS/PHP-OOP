@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\SqlQuery;
+use App\Controllers\UserController;
 
 use Aura\SqlQuery\QueryFactory;
 use League\Plates\Engine;
@@ -21,11 +22,13 @@ class HomeViewController
     if( !session_id() ) @session_start();
 
     $this->pdo = $pdo;
-    $this->engine = $auth;
+    $this->auth = $auth;
     $this->query = $query;
     $this->engine = $engine;
 
+    $this->id = $this->auth->getUserId();
     $this->sqlQuery = new SqlQuery($this->pdo, $this->query);
+    $this->userControll = new UserController($this->pdo, $this->auth);
   }
 
   public function index(){
@@ -37,7 +40,9 @@ class HomeViewController
       $posts = $this->sqlQuery->select("users");
 
       echo $this->engine->render('users', [
-        'posts' => $posts
+        'posts' => $posts,
+        'userControll' => $this->userControll,
+        'getRole' => $this->auth->getRoles()
       ]);
     else:
       header("Location: /pageLogin");die;
@@ -54,6 +59,12 @@ class HomeViewController
 
   public function pageVerefication(){
     echo $this->engine->render('page_verefication');
+  }
+
+  public function pageCreate(){
+    echo $this->engine->render('create_user', [
+      'id' => $this->id
+    ]);
   }
 
 }
