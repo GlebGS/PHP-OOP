@@ -1,5 +1,6 @@
 <?php
 
+use Aura\SqlQuery\QueryFactory;
 use League\Plates\Engine;
 use \Delight\Auth\Auth;
 
@@ -21,5 +22,10 @@ return [
 
   \Delight\Auth\Auth::class => function($container){
     return new \Delight\Auth\Auth($container->get('PDO'));
+  },
+
+  \Aura\SqlQuery\QueryFactory::class => function(){
+    return new QueryFactory('mysql');
   }
+
 ];
