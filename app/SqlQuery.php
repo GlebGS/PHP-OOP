@@ -26,4 +26,15 @@ class SqlQuery{
     return $sth->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function insert($id, $table, $data){
+    $insert = $this->query->newInsert();
+
+    $insert->into($table)
+          ->cols($data)
+          ->bindValues($data);
+
+    $sth = $this->pdo->prepare($insert->getStatement());
+    $sth->execute($insert->getBindValues());
+  }
+
 }
