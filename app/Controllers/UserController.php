@@ -35,9 +35,10 @@ class UserController
       $userId = $this->auth->register($_POST['email'], $_POST['password'], $_POST['username'], function ($selector, $token) {
 
         flash()->success("<b>Уведомление!</b> Регистрация прошла успешно. Мы отправили сообщение на ваш Email!");
-        header("Location: /pageVerefication");
         return new EmailController($_POST['email'], $_POST['password'], $selector, $token);
       });
+
+      header("Location: /pageVerefication?id=$userId");
     } catch (\Delight\Auth\InvalidEmailException $e) {
       flash()->error("Неверный адрес электронной почты!");
       header("Location: /pageRegistr");
@@ -62,10 +63,11 @@ class UserController
   {
     try {
       $this->auth->confirmEmail($_POST['selector'], $_POST['token']);
+      $id = $_GET['id'];
 
       flash()->success("<b>Уведомление!</b> Email подтверждён!");
       header("Location: /pageLogin");
-      die;
+      return $this->sqlQuery->insert(['user_id' => $id, 'img' => ' ', 'position' => ' ', 'phone' => ' ', 'address' => ' '], 'userinfo');
     } catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
       flash()->success("<b>Уведомление!</b> Email подтверждён!");
       header("Location: /pageVerefication");
@@ -102,7 +104,6 @@ class UserController
 
   public function logout()
   {
-
     header("Location: /users");
     die;
   }
@@ -123,7 +124,6 @@ class UserController
 
     try {
       $userId = $this->auth->admin()->createUser($_POST['email'], $_POST['password'], $_POST['username']);
-      $id = 1;
 
       $data = [
         'user_id' => $userId,
@@ -133,6 +133,8 @@ class UserController
         'address' => $_POST['address']
       ];
       $this->sqlQuery->insert($data, 'userinfo');
+
+      $id = $this->auth->getUserId();
 
       flash()->success("<b>Уведомлени!</b> Пользователь успешно добавлен!");
       header("Location: /users?id=$id");

@@ -13,7 +13,7 @@
 
     <?php echo flash()->display(); ?>
 
-    <form method="post" action="/create">
+    <form method="post" action=<?php echo "/create?id=$id"; ?>
         <div class="row">
             <div class="col-xl-6">
                 <div id="panel-1" class="panel">

@@ -1,3 +1,5 @@
+<?php $id = $_GET['id']; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +38,7 @@
 
     <?php echo flash()->display(); ?>
 
-    <form method="post" action="/verefication">
+    <form method="post" action=<?php echo "/verefication?id=$id"; ?>>
       <div class="form-group">
         <label class="form-label" for="username">Selector</label>
         <input type="text" id="username" name="selector" class="form-control" placeholder="Selector" value="">

@@ -15,8 +15,9 @@ class HomeViewController
   private $auth;
   private $pdo;
 
-  public function __construct(PDO $pdo, Engine $engine, Auth $auth, QueryFactory $query){
-    if( !session_id() ) @session_start();
+  public function __construct(PDO $pdo, Engine $engine, Auth $auth, QueryFactory $query)
+  {
+    if (!session_id()) @session_start();
 
     $this->pdo = $pdo;
     $this->auth = $auth;
@@ -28,13 +29,16 @@ class HomeViewController
     $this->userControll = new UserController($this->pdo, $this->auth, $this->query);
   }
 
-  public function index(){
-    header("Location: /pageLogin");die;
+  public function index()
+  {
+    header("Location: /pageLogin");
+    die;
   }
 
-  public function users(){
+  public function users()
+  {
     if ($_GET['id']):
-      $posts = $this->sqlQuery->select("users");
+      $posts = $this->sqlQuery->selectJoin("users", "userinfo");
 
       echo $this->engine->render('users', [
         'posts' => $posts,
@@ -42,23 +46,28 @@ class HomeViewController
         'getRole' => $this->auth->getRoles()
       ]);
     else:
-      header("Location: /pageLogin");die;
+      header("Location: /pageLogin");
+      die;
     endif;
   }
 
-  public function pageLogin(){
+  public function pageLogin()
+  {
     echo $this->engine->render('page_login');
   }
 
-  public function pageRegistr(){
+  public function pageRegistr()
+  {
     echo $this->engine->render('page_register');
   }
 
-  public function pageVerefication(){
+  public function pageVerefication()
+  {
     echo $this->engine->render('page_verefication');
   }
 
-  public function pageCreate(){
+  public function pageCreate()
+  {
     echo $this->engine->render('create_user', [
       'id' => $this->id
     ]);
