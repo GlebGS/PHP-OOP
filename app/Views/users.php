@@ -1,8 +1,8 @@
-<?php $this->layout('../view_layout');?>
+<?php $this->layout('../view_layout'); ?>
 
 <main id="js-page-content" role="main" class="page-content mt-3">
 
-<!--    FLASH-MESSAGE-->
+    <?php echo flash()->display(); ?>
 
     <div class="subheader">
         <h1 class="subheader-title">
@@ -96,7 +96,6 @@
                       </div>
                   </div>
 
-                <?php if ($getRole[1] === "ADMIN"): ?>
                     <div class="card-body p-0 collapse show">
                         <div class="p-3">
                             <a href="tel:<?php echo $v['phone']; ?>" class="mt-1 d-block fs-sm fw-400 text-dark">
@@ -125,11 +124,6 @@
                             </div>
                         </div>
                     </div>
-                <?php else: ?>
-
-                <?php endif; ?>
-
-
 
               </div>
           </div>

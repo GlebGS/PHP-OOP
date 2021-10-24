@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
-
 use App\Controllers\EmailController;
+use Aura\SqlQuery\QueryFactory;
 use Tamtamchik\SimpleFlash\Flash;
+use App\SqlQuery;
 
 use Delight\Auth\Auth;
 use PDO;
@@ -12,15 +13,19 @@ use PDO;
 class UserController
 {
 
+  private $query;
   private $auth;
   private $pdo;
 
-  public function __construct(PDO $pdo, Auth $auth)
+  public function __construct(PDO $pdo, Auth $auth, QueryFactory $query)
   {
     if (!session_id()) @session_start();
 
     $this->pdo = $pdo;
     $this->auth = $auth;
+    $this->query = $query;
+
+    $this->sqlQuery = new SqlQuery($this->pdo, $this->query);
   }
 
 //  Functions
@@ -112,29 +117,38 @@ class UserController
     }
   }
 
-  public function create(){
-
-    $data = [
-      'username' => $_POST['username'],
-      'position' => $_POST['position'],
-      'phone' => $_POST['phone'],
-      'email' => $_POST['email'],
-      'password' => $_POST['password']
-    ];
+//  create user
+  public function create()
+  {
 
     try {
       $userId = $this->auth->admin()->createUser($_POST['email'], $_POST['password'], $_POST['username']);
+      $id = 1;
 
-      echo 'We have signed up a new user with the ID ' . $userId;
-    }
-    catch (\Delight\Auth\InvalidEmailException $e) {
-      die('Invalid email address');
-    }
-    catch (\Delight\Auth\InvalidPasswordException $e) {
-      die('Invalid password');
-    }
-    catch (\Delight\Auth\UserAlreadyExistsException $e) {
-      die('User already exists');
+      $data = [
+        'user_id' => $userId,
+        'img' => '123',
+        'position' => $_POST['position'],
+        'phone' => $_POST['phone'],
+        'address' => $_POST['address']
+      ];
+      $this->sqlQuery->insert($data, 'userinfo');
+
+      flash()->success("<b>Уведомлени!</b> Пользователь успешно добавлен!");
+      header("Location: /users?id=$id");
+      die;
+    } catch (\Delight\Auth\InvalidEmailException $e) {
+      flash()->error("<b>Уведомлени!</b> Invalid email address!");
+      header("Location: /pageCreate");
+      die;
+    } catch (\Delight\Auth\InvalidPasswordException $e) {
+      flash()->error("<b>Уведомлени!</b> Invalid password!");
+      header("Location: /pageCreate");
+      die;
+    } catch (\Delight\Auth\UserAlreadyExistsException $e) {
+      flash()->error("<b>Уведомлени!</b> User already exists!");
+      header("Location: /pageCreate");
+      die;
     }
   }
 

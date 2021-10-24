@@ -3,6 +3,7 @@
 use Aura\SqlQuery\QueryFactory;
 use League\Plates\Engine;
 use \Delight\Auth\Auth;
+use \App\SqlQuery;
 
 return [
   PDO::class => function(){
@@ -25,7 +26,7 @@ return [
   },
 
   \Aura\SqlQuery\QueryFactory::class => function(){
-    return new QueryFactory('mysql');
+    return new QueryFactory('Mysql');
   }
 
 ];

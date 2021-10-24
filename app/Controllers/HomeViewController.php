@@ -3,8 +3,6 @@
 namespace App\Controllers;
 
 use App\SqlQuery;
-use App\Controllers\UserController;
-
 use Aura\SqlQuery\QueryFactory;
 use League\Plates\Engine;
 use \Delight\Auth\Auth;
@@ -12,7 +10,6 @@ use PDO;
 
 class HomeViewController
 {
-  private $sqlQuery;
   private $engine;
   private $query;
   private $auth;
@@ -28,7 +25,7 @@ class HomeViewController
 
     $this->id = $this->auth->getUserId();
     $this->sqlQuery = new SqlQuery($this->pdo, $this->query);
-    $this->userControll = new UserController($this->pdo, $this->auth);
+    $this->userControll = new UserController($this->pdo, $this->auth, $this->query);
   }
 
   public function index(){
