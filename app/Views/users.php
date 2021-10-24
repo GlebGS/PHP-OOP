@@ -1,4 +1,8 @@
-<?php $this->layout('../view_layout'); ?>
+<?php $this->layout('../view_layout',[
+        'id' => $_GET['id']
+]); ?>
+
+<?php $id = $_GET['id']; ?>
 
 <main id="js-page-content" role="main" class="page-content mt-3">
 
@@ -13,7 +17,7 @@
         <div class="col-xl-12">
 
             <?php if ($getRole[1] === "ADMIN"): ?>
-                <a class="btn btn-success" href="/pageCreate">Добавить</a>
+                <a class="btn btn-success" href=<?php echo "/pageCreate?id=$id"; ?>>Добавить</a>
             <?php else: ?>
 
             <?php endif; ?>
@@ -48,7 +52,7 @@
                                 </span>
                           <div class="info-card-text flex-1">
 
-                              <?php if ($getRole[1] === "ADMIN"): ?>
+                              <?php if ($getRole[1] === "ADMIN" OR $v['id'] === $id): ?>
                                   <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
                                       <?php echo $v['username']; ?>
                                       <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
@@ -60,7 +64,7 @@
                                   </p>
                               <?php endif; ?>
 
-                            <?php if ($getRole[1] === "ADMIN"): ?>
+                            <?php if ($getRole[1] === "ADMIN" OR $v['id'] === $id): ?>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="edit.html">
                                         <i class="fa fa-edit"></i>

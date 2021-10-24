@@ -1,4 +1,6 @@
-<?php $this->layout('../view_layout'); ?>
+<?php $this->layout('../view_layout', [
+      'id' => $_GET['id']
+]); ?>
 
 <main id="js-page-content" role="main" class="page-content mt-3">
     <div class="subheader">
