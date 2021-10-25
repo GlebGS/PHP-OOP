@@ -3,8 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\EmailController;
-use Aura\SqlQuery\QueryFactory;
 use Tamtamchik\SimpleFlash\Flash;
+use Aura\SqlQuery\QueryFactory;
+use App\File;
 use App\SqlQuery;
 
 use Delight\Auth\Auth;
@@ -121,17 +122,20 @@ class UserController
 //  create user
   public function create()
   {
-
     try {
+      $file = new File($_FILES['file']);
       $userId = $this->auth->admin()->createUser($_POST['email'], $_POST['password'], $_POST['username']);
 
       $data = [
         'user_id' => $userId,
-        'img' => '123',
+        'img' => "/" . $file->pathFile(),
         'position' => $_POST['position'],
         'phone' => $_POST['phone'],
-        'address' => $_POST['address']
+        'address' => $_POST['address'],
+        'status_user' => $_POST['status']
       ];
+
+      $file->upLoad();
       $this->sqlQuery->insert($data, 'userinfo');
 
       $id = $this->auth->getUserId();

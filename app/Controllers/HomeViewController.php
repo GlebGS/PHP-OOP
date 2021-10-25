@@ -38,7 +38,7 @@ class HomeViewController
   public function users()
   {
     if ($_GET['id']):
-      $posts = $this->sqlQuery->selectJoin("users", "userinfo");
+      $posts = $this->sqlQuery->selectJoin();
 
       echo $this->engine->render('users', [
         'posts' => $posts,

@@ -41,6 +41,10 @@
                         <a href="/pageLogin" class="btn-link text-white ml-auto ml-sm-0">
                             Войти
                         </a>
+                        <span style="color: #fff;">&ensp;|&ensp;</span>
+                        <a href="/pageVerefication" class="btn-link text-white ml-auto ml-sm-0">
+                            Подтвердить Email
+                        </a>
                     </div>
                 </div>
                 <div class="flex-1" style="background: url(img/svg/pattern-1.svg) no-repeat center bottom fixed; background-size: cover;">
@@ -79,7 +83,7 @@
                                             <input type="password" id="userpassword" name="password" class="form-control" placeholder="" required>
                                             <div class="invalid-feedback">Заполните поле.</div>
                                         </div>
-                                       
+
                                         <div class="row no-gutters">
                                             <div class="col-md-4 ml-auto text-right">
                                                 <button id="js-login-btn" type="submit" class="btn btn-block btn-danger btn-lg mt-3">Регистрация</button>

@@ -26,8 +26,10 @@ class SqlQuery{
     return $sth->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function selectJoin($table1, $table2){
-    $sql = "SELECT * FROM users INNER JOIN userinfo ON users.id = userinfo.user_id ";
+  public function selectJoin(){
+    $sql = <<<DOC
+    SELECT * FROM users INNER JOIN userinfo ON users.id = userinfo.user_id
+DOC;
 
     $select = $this->pdo->prepare($sql);
     $select->execute();
