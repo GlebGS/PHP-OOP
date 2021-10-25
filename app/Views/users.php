@@ -2,6 +2,25 @@
         'id' => $_GET['id']
 ]); ?>
 
+<?php
+
+    foreach ($posts as $v){
+
+      switch ($v['status_user']) {
+        case 0:
+          $v['status_user'] = "Warning";
+          break;
+        case 1:
+          $v['status_user'] = "Success";
+          break;
+        case 2:
+          $v['status_user'] = "Danger";
+          break;
+      }
+    }
+
+?>
+
 <?php $id = $_GET['id']; ?>
 
 <main id="js-page-content" role="main" class="page-content mt-3">
@@ -42,12 +61,25 @@
 
       <?php foreach ($posts as $v): ?>
 
+        <?php
+            switch ($v['status_user']) {
+              case 0:
+                $v['status_user'] = "warning";
+                break;
+              case 1:
+                $v['status_user'] = "success";
+                break;
+              case 2:
+                $v['status_user'] = "danger";
+                break;
+            }
+        ?>
 
           <div class="col-xl-4">
               <div id="c_<?php echo $v['id']; ?>" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="<?php echo $v['username']; ?>">
                   <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                       <div class="d-flex flex-row align-items-center">
-                                <span class="status status-success mr-3">
+                                <span class="status status-<?php echo $v['status_user']; ?> mr-3">
                                     <span class="rounded-circle profile-image d-block "
                                           style="background-image:url(<?php echo $v['img']; ?>); background-size: cover;"></span>
                                 </span>
