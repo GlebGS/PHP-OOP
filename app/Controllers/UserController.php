@@ -158,4 +158,18 @@ class UserController
     }
   }
 
+  public function update(){
+    $id = $_GET['id'];
+
+    $this->sqlQuery->updateUsers([
+      'username' => $_POST['username']
+    ], "users", $id);
+
+    $this->sqlQuery->updateUserinfo([
+      'position' => $_POST['position'],
+      'phone' => $_POST['phone'],
+      'address' => $_POST['address']
+    ], "userinfo", $id);
+  }
+
 }

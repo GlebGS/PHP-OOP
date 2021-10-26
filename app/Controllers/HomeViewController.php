@@ -73,4 +73,14 @@ class HomeViewController
     ]);
   }
 
+  public function edit()
+  {
+    $posts = $this->sqlQuery->select($_GET['id']);
+
+    echo $this->engine->render('edit', [
+      'id' => $this->id,
+      'posts' => $posts
+    ]);
+  }
+
 }

@@ -1,25 +1,7 @@
 <?php $this->layout('../view_layout',[
-        'id' => $_GET['id']
+        'id' => $_GET['id'],
+        'role' => $getRole
 ]); ?>
-
-<?php
-
-    foreach ($posts as $v){
-
-      switch ($v['status_user']) {
-        case 0:
-          $v['status_user'] = "Warning";
-          break;
-        case 1:
-          $v['status_user'] = "Success";
-          break;
-        case 2:
-          $v['status_user'] = "Danger";
-          break;
-      }
-    }
-
-?>
 
 <?php $id = $_GET['id']; ?>
 
@@ -99,7 +81,7 @@
 
                             <?php if ($getRole[1] === "ADMIN" OR $v['id'] === $id): ?>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="edit.html">
+                                    <a class="dropdown-item" href="/edit?id=<?php echo $v['id']; ?>">
                                         <i class="fa fa-edit"></i>
                                         Редактировать</a>
                                     <a class="dropdown-item" href="security.html">
@@ -148,17 +130,6 @@
                                 <i class="fas fa-map-pin mr-2"></i>
                               <?php echo $v['address']; ?>
                             </address>
-                            <div class="d-flex flex-row">
-                                <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#4680C2">
-                                    <i class="fab fa-vk"></i>
-                                </a>
-                                <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#38A1F3">
-                                    <i class="fab fa-telegram"></i>
-                                </a>
-                                <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#E1306C">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </div>
                         </div>
                     </div>
 

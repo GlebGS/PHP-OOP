@@ -19,12 +19,14 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
   $r->addRoute('GET', '/pageRegistr', ['App\Controllers\HomeViewController', 'pageRegistr']);
   $r->addRoute('GET', '/pageVerefication[?{id:\d+}]', ['App\Controllers\HomeViewController', 'pageVerefication']);
   $r->addRoute('GET', '/pageCreate[?{id:\d+}]', ['App\Controllers\HomeViewController', 'pageCreate']);
+  $r->addRoute('GET', '/edit[?{id:\d+}]', ['App\Controllers\HomeViewController', 'edit']);
 
 //  Functions
   $r->addRoute('POST', '/log_in', ['App\Controllers\UserController', 'log_in']);
   $r->addRoute('POST', '/sign_up', ['App\Controllers\UserController', 'sign_up']);
   $r->addRoute('POST', '/verefication[?{id:\d+}]', ['App\Controllers\UserController', 'verefication']);
   $r->addRoute('POST', '/create[?{id:\d+}]', ['App\Controllers\UserController', 'create']);
+  $r->addRoute('POST', '/update[?{id:\d+}]', ['App\Controllers\UserController', 'update']);
   $r->addRoute('GET', '/logout', ['App\Controllers\UserController', 'logout']);
 
 });

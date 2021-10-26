@@ -15,20 +15,25 @@ class SqlQuery{
     $this->pdo = $pdo;
   }
 
-  public function select($table){
-    $select = $this->query->newSelect();
+  public function select($id){
+    $sql = <<<DOC
+    SELECT * FROM users 
+        INNER JOIN userinfo 
+            ON users.id = userinfo.user_id 
+                WHERE users.id = $id 
+DOC;
 
-    $select->from("$table")
-            ->cols([ "*" ]);
-    $sth = $this->pdo->prepare($select->getStatement());
-    $sth->execute($select->getBindValues());
+    $select = $this->pdo->prepare($sql);
+    $select->execute();
 
-    return $sth->fetchAll(PDO::FETCH_ASSOC);
+    return $select->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function selectJoin(){
     $sql = <<<DOC
-    SELECT * FROM users INNER JOIN userinfo ON users.id = userinfo.user_id
+    SELECT * FROM users 
+        INNER JOIN userinfo 
+            ON users.id = userinfo.user_id
 DOC;
 
     $select = $this->pdo->prepare($sql);
@@ -46,6 +51,30 @@ DOC;
 
     $sth = $this->pdo->prepare($insert->getStatement());
     return $sth->execute($insert->getBindValues());
+  }
+
+  public function updateUsers($data, $table, $id){
+
+    $update = $this->query->newUpdate();
+
+    $update->table($table)
+    ->cols($data)
+    ->where("id = $id");
+
+    $sth = $this->pdo->prepare($update->getStatement());
+    return $sth->execute($update->getBindValues());
+  }
+
+  public function updateUserinfo($data, $table, $id){
+
+    $update = $this->query->newUpdate();
+
+    $update->table($table)
+      ->cols($data)
+      ->where("user_id = $id");
+
+    $sth = $this->pdo->prepare($update->getStatement());
+    return $sth->execute($update->getBindValues());
   }
 
 }
