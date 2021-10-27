@@ -77,4 +77,15 @@ DOC;
     return $sth->execute($update->getBindValues());
   }
 
+  public function delete($id){
+
+    $sql = <<<HEAR
+      DELETE FROM `users` WHERE `id` = $id; 
+      DELETE FROM `userinfo` WHERE `user_id` = $id;
+HEAR;
+
+    $select = $this->pdo->prepare($sql);
+    $select->execute();
+  }
+
 }

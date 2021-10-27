@@ -1,5 +1,4 @@
 <?php
-
 use App\SqlQuery;
 
 if( !session_id() ) @session_start();
@@ -33,6 +32,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
   $r->addRoute('POST', '/security_func[?{id:\d+}]', ['App\Controllers\UserController', 'security_func']);
   $r->addRoute('POST', '/status_func[?{id:\d+}]', ['App\Controllers\UserController', 'status_func']);
   $r->addRoute('POST', '/media_func[?{id:\d+}]', ['App\Controllers\UserController', 'media_func']);
+  $r->addRoute('GET', '/delete_func[?{id:\d+}]', ['App\Controllers\UserController', 'delete_func']);
   $r->addRoute('GET', '/logout', ['App\Controllers\UserController', 'logout']);
 
 });

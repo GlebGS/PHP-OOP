@@ -29,7 +29,6 @@ class UserController
     $this->sqlQuery = new SqlQuery($this->pdo, $this->query);
   }
 
-//  Functions
   public function sign_up()
   {
     try {
@@ -110,7 +109,6 @@ class UserController
     die;
   }
 
-//  Roles
   public function addRoll($userId)
   {
     try {
@@ -120,7 +118,6 @@ class UserController
     }
   }
 
-//  create user
   public function create()
   {
     try {
@@ -221,6 +218,14 @@ class UserController
     $file->upLoad();
 
     flash()->success("<b>Уведомлени!</b> Изображение было успешно измененно!");
+    header("Location: /users?id=$id");
+    die;
+  }
+
+  public function delete_func(){
+    $id = $_GET['id'];
+    $this->sqlQuery->delete($id);
+
     header("Location: /users?id=$id");
     die;
   }
