@@ -90,7 +90,7 @@
                                     <a class="dropdown-item" href="/status?id=<?php echo $v['id']; ?>">
                                         <i class="fa fa-sun"></i>
                                         Установить статус</a>
-                                    <a class="dropdown-item" href="media.html">
+                                    <a class="dropdown-item" href="/medias?id=<?php echo $v['id']; ?>">
                                         <i class="fa fa-camera"></i>
                                         Загрузить аватар
                                     </a>

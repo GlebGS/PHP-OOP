@@ -25,12 +25,12 @@
             $v['status_user'] = "Онлайн";
             break;
           case 2:
-            $v['status_user'] = "Отошел";
+            $v['status_user'] = "Отошёл";
             break;
         }
         ?>
 
-        <form action="">
+        <form method="post" action=<?php echo "/status_func?id=$user_id"; ?>>
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -44,11 +44,12 @@
                                         <!-- status -->
                                         <div class="form-group">
                                             <label class="form-label" for="example-select">Выберите статус</label>
-                                            <select class="form-control" id="example-select">
-                                                <option><?php echo $v['status_user'] ; ?></option>
-                                                <option>Онлайн</option>
-                                                <option>Отошел</option>
-                                                <option>Не беспокоить</option>
+                                            <select class="form-control" id="example-select" name="option">
+
+                                                <option value="1" <?php if ($v['status_user'] == "Онлайн") echo 'selected'; ?> >Онлайн</option>
+                                                <option value="2" <?php if ($v['status_user'] == "Отошёл") echo 'selected'; ?> >Отошел</option>
+                                                <option value="0" <?php if ($v['status_user'] == "Не беспокоить") echo 'selected'; ?> >Не беспокоить</option>
+
                                             </select>
                                         </div>
                                     </div>

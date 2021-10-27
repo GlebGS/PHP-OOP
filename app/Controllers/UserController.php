@@ -200,4 +200,29 @@ class UserController
 
   }
 
+  public function status_func(){
+    $id = $_GET['id'];
+
+    $this->sqlQuery->updateUserinfo([
+      'status_user' => $_POST['option']
+    ], "userinfo", $id);
+
+    header("Location: /users?id=$id");
+    die;
+  }
+
+  public function media_func(){
+    $id = $_GET['id'];
+    $file = new File($_FILES['file']);
+
+    $data = [ 'img' => "/" . $file->pathFile() ];
+
+    $this->sqlQuery->updateUserinfo( $data,'userinfo', $id);
+    $file->upLoad();
+
+    flash()->success("<b>Уведомлени!</b> Изображение было успешно измененно!");
+    header("Location: /users?id=$id");
+    die;
+  }
+
 }

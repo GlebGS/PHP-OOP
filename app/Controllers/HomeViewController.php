@@ -103,4 +103,14 @@ class HomeViewController
     ]);
   }
 
+  public function medias()
+  {
+    $posts = $this->sqlQuery->select($_GET['id']);
+
+    echo $this->engine->render('medias', [
+      'id' => $this->id,
+      'posts' => $posts
+    ]);
+  }
+
 }
