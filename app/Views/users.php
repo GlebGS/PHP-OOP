@@ -84,10 +84,10 @@
                                     <a class="dropdown-item" href="/edit?id=<?php echo $v['id']; ?>">
                                         <i class="fa fa-edit"></i>
                                         Редактировать</a>
-                                    <a class="dropdown-item" href="security.html">
+                                    <a class="dropdown-item" href="/security?id=<?php echo $v['id']; ?>">
                                         <i class="fa fa-lock"></i>
                                         Безопасность</a>
-                                    <a class="dropdown-item" href="status.html">
+                                    <a class="dropdown-item" href="/status?id=<?php echo $v['id']; ?>">
                                         <i class="fa fa-sun"></i>
                                         Установить статус</a>
                                     <a class="dropdown-item" href="media.html">

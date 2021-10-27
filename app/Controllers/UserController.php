@@ -40,6 +40,7 @@ class UserController
       });
 
       header("Location: /pageVerefication?id=$userId");
+      die;
     } catch (\Delight\Auth\InvalidEmailException $e) {
       flash()->error("Неверный адрес электронной почты!");
       header("Location: /pageRegistr");
@@ -170,6 +171,33 @@ class UserController
       'phone' => $_POST['phone'],
       'address' => $_POST['address']
     ], "userinfo", $id);
+  }
+
+  public function security_func(){
+    try {
+      $id = $_GET['id'];
+      $this->auth->changePassword($_POST['password'], $_POST['password_reset']);
+
+      flash()->success("<b>Уведомление!</b> Пароль был успешно изменен!");
+      header("Location: /users?id=$id");
+      die;
+    }
+    catch (\Delight\Auth\NotLoggedInException $e) {
+      flash()->error("<b>Уведомление!</b> Не вошел!");
+      header("Location: /security?id=$id");
+      die;
+    }
+    catch (\Delight\Auth\InvalidPasswordException $e) {
+      flash()->error("<b>Уведомление!</b> Неверный пароль!");
+      header("Location: /security?id=$id");
+      die;
+    }
+    catch (\Delight\Auth\TooManyRequestsException $e) {
+      flash()->error("<b>Уведомление!</b> Слишком много запросов!");
+      header("Location: /security?id=$id");
+      die;
+    }
+
   }
 
 }

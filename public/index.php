@@ -20,6 +20,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
   $r->addRoute('GET', '/pageVerefication[?{id:\d+}]', ['App\Controllers\HomeViewController', 'pageVerefication']);
   $r->addRoute('GET', '/pageCreate[?{id:\d+}]', ['App\Controllers\HomeViewController', 'pageCreate']);
   $r->addRoute('GET', '/edit[?{id:\d+}]', ['App\Controllers\HomeViewController', 'edit']);
+  $r->addRoute('GET', '/security[?{id:\d+}]', ['App\Controllers\HomeViewController', 'security']);
+  $r->addRoute('GET', '/status[?{id:\d+}]', ['App\Controllers\HomeViewController', 'status']);
 
 //  Functions
   $r->addRoute('POST', '/log_in', ['App\Controllers\UserController', 'log_in']);
@@ -27,6 +29,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
   $r->addRoute('POST', '/verefication[?{id:\d+}]', ['App\Controllers\UserController', 'verefication']);
   $r->addRoute('POST', '/create[?{id:\d+}]', ['App\Controllers\UserController', 'create']);
   $r->addRoute('POST', '/update[?{id:\d+}]', ['App\Controllers\UserController', 'update']);
+  $r->addRoute('POST', '/security_func[?{id:\d+}]', ['App\Controllers\UserController', 'security_func']);
   $r->addRoute('GET', '/logout', ['App\Controllers\UserController', 'logout']);
 
 });

@@ -83,4 +83,24 @@ class HomeViewController
     ]);
   }
 
+  public function security()
+  {
+    $posts = $this->sqlQuery->select($_GET['id']);
+
+    echo $this->engine->render('security', [
+      'id' => $this->id,
+      'posts' => $posts
+    ]);
+  }
+
+  public function status()
+  {
+    $posts = $this->sqlQuery->select($_GET['id']);
+
+    echo $this->engine->render('status', [
+      'id' => $this->id,
+      'posts' => $posts
+    ]);
+  }
+
 }
